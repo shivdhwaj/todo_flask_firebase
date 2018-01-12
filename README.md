@@ -1,7 +1,7 @@
 # TodoApp Flask Firebase
 Python micro framework Flask alongwith Firebase used to apply for TODO application to implement CRUD
 
-##Tech Used:
+## Tech Used:
 1. Virtual Environment
 2. Flask Framework
 3. Firebase
