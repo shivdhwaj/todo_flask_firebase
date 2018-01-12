@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+<script type=text/javascript>
+  $(function() {
+    $('.input_data').bind('click', function() {
+      $.post($SCRIPT_ROOT +'/update', {
+        key: $(this).attr('id')
+      }, function(data) {
+        window.location = "/list";
+      });
+      return false;
+    });
+    $('.delete_me').bind('click', function() {
+      $.ajax({
+      	url: $SCRIPT_ROOT +'/delete', 
+      	type: 'DELETE',
+      	data: {
+        	key: $(this).attr('id')
+      		},
+      	success: function(data) {
+        		window.location = "/list";
+      		}
+  		});
+      return false;
+    });
+  });
+</script>
+<div class="clearfix"></div>
+<div class="home mt-4">
+	<div class="">
+		<div class="list-group">
+			{%	if tasks: %}
+					{% for key,task in tasks.items(): %}
+						<div class="row">
+							<a href="#" class="list-group-item list-group-item-action">
+						    	{% if task['completed']:%}
+									<strike>
+								{% endif%}
+
+									{% if not task['completed']:%}
+										<input class="input_data" id="{{key}}" type="checkbox" aria-label="Checkbox for following text input">
+									{% endif%}
+
+						    		{{task['subject']}} - {{task['detail']}}{{key}}
+
+						    	{% if task['completed']%}
+						    		<img class="float-right delete_me" id='{{key}}' style="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABBUlEQVQ4T+3UPUoEQRAF4G/xNxAT8ScT8QaKgYGZG5iJqRcQ3CsYewUNTMTAQwgKigfQzNBQFMFAFHVdWmpgGGbcNjPYhobuelWv6k1NdUv92sZaA1aYL3Ba9Wk1BB3gJnadywoW0akjnAvjEKbivIcr3DYkXMIy9gN/RDedU4VnYRzFKl4wjpE+kj/whklcI927Zcmp0hOs9yGqwknJJlKVPxUWq0o4g4cAJ0LSa8RMl7BswsvI/IRdfOIQs6GkHcmyCcuOqZuJMHW/qmRA2NzlwTf8h7/NObbwjJ0Y/iOksTvGxl8nZQzvETSMb3zFvYxlT0ruo/Mr4R3uc5nCbx4LxfPVAx4/f+e8Ql9PAAAAAElFTkSuQmCC" alt="Delete" />
+									</strike>
+								{% endif%}
+					    	</a>
+						</div>
+				{% endfor %}
+			{% else %}
+				<h3 class="text-center">No task found</h3>
+			{% endif %}
+		</div>
+	</div>	
+</div>
+<!-- {{tasks}} -->
+{% endblock %}

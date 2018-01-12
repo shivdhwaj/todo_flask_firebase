@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="clearfix"></div>
+<div class="home mt-4">
+	<div class="d-flex justify-content-around">
+		<!-- <div class="float-left">
+			List of Tasks
+		</div>
+		<div class="float-right">
+			Add Task
+		</div>
+		<div class="float-right">
+			Edit Task
+		</div> -->
+		<h3>Total Tasks: {{total}}</h3>
+		<h3>Pending: {{pending}}</h3>
+		<h3>Completed: {{completed}}</h3>
+	</div>	
+</div>
+{% endblock %}
